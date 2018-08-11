@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ./tmp/base_data/db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: welcome
+      MYSQL_DATABASE: base
+    ports:
+      - "3309:3306"
+
+  redis:
+    image: 'redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6380:6379'
